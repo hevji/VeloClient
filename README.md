@@ -8,7 +8,7 @@ there wil be many features.
 
 ## The sad part ;(
 
-Right now enabled things that enable or inject javascript (like userscripts adblocker etc)
+Right now enabling things that enable or inject javascript (like userscripts adblocker etc)
 will make it so krunker doesnt load, im working on it!
 
 > stay tuned!
