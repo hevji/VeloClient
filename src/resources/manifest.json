@@ -1,0 +1,4 @@
+{
+  "_comment": "Map local filenames to krunker asset URLs. Drop your file into resources/ and add an entry here.",
+  "swaps": []
+}

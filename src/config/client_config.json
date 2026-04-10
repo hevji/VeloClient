@@ -1,0 +1,32 @@
+{
+  "crosshair": {
+    "enabled": true,
+    "style": "cross",
+    "color": "#2dd4bf",
+    "size": 3,
+    "thickness": 3,
+    "gap": 3,
+    "opacity": 1,
+    "outline": true,
+    "outline_color": "#000000"
+  },
+  "client": {
+    "fps_limit_enabled": true,
+    "fps_limit": 144,
+    "fullscreen": true,
+    "window_size_enabled": false,
+    "window_width": 1280,
+    "window_height": 720,
+    "keep_launcher_open": true,
+    "debug_logs": true,
+    "block_ads": false,
+    "enable_gpu": true,
+    "show_menu_keybind": "`",
+    "resource_swapper": false,
+    "custom_css_enabled": false,
+    "custom_css": "",
+    "chrome_flags_enabled": false,
+    "chrome_flags": ""
+  },
+  "scripts": {}
+}

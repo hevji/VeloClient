@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velo Client</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+
+  <!-- ── Main Menu ── -->
+  <div id="app">
+    <div id="main-menu">
+      <div id="menu-top">
+        <div id="logo">
+          <span class="logo-velo">VELO</span>
+          <span class="logo-client">CLIENT</span>
+        </div>
+        <div id="logo-sub">a krunker client in python</div>
+      </div>
+      <div id="menu-buttons">
+        <button class="menu-btn primary" id="btn-play">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Play
+        </button>
+        <button class="menu-btn" id="btn-settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06-.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </button>
+        <button class="menu-btn" id="btn-scripts">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Scripts
+        </button>
+        <button class="menu-btn" id="btn-logs">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Logs
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Settings Overlay ── -->
+  <div class="overlay" id="overlay-settings">
+    <div class="overlay-panel">
+      <div class="overlay-header">
+        <span class="overlay-title">Settings</span>
+        <button class="overlay-close" data-close="settings">✕</button>
+      </div>
+      <div class="overlay-body" id="settings-body">
+
+        <!-- FPS Limit -->
+        <div class="setting-row" data-key="fps_limit_enabled">
+          <div class="setting-info">
+            <div class="setting-name">FPS Limit</div>
+            <div class="setting-desc">Cap the frame rate</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-fps-enabled"><div class="toggle-track"></div></label>
+        </div>
+        <div class="setting-expand" id="expand-fps">
+          <div class="expand-inner">
+            <div class="expand-row">
+              <span class="expand-label">Max FPS</span>
+              <input type="number" class="num-input" id="s-fps-limit" min="10" max="999" value="144">
+            </div>
+          </div>
+        </div>
+
+        <!-- Fullscreen -->
+        <div class="setting-row" data-key="fullscreen">
+          <div class="setting-info">
+            <div class="setting-name">Fullscreen</div>
+            <div class="setting-desc">Launch in fullscreen (F11)</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-fullscreen"><div class="toggle-track"></div></label>
+        </div>
+
+        <!-- Window Size -->
+        <div class="setting-row" data-key="window_size_enabled">
+          <div class="setting-info">
+            <div class="setting-name">Custom Window Size</div>
+            <div class="setting-desc">Override default resolution</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-winsize-enabled"><div class="toggle-track"></div></label>
+        </div>
+        <div class="setting-expand" id="expand-winsize">
+          <div class="expand-inner">
+            <div class="expand-row">
+              <span class="expand-label">Width</span>
+              <input type="number" class="num-input" id="s-win-w" min="640" max="7680" value="1280">
+            </div>
+            <div class="expand-row">
+              <span class="expand-label">Height</span>
+              <input type="number" class="num-input" id="s-win-h" min="360" max="4320" value="720">
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Crosshair -->
+        <div class="setting-row" data-key="crosshair_enabled">
+          <div class="setting-info">
+            <div class="setting-name">Custom Crosshair</div>
+            <div class="setting-desc">Override the in-game crosshair</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-ch-enabled"><div class="toggle-track"></div></label>
+        </div>
+        <div class="setting-expand" id="expand-crosshair">
+          <div class="expand-inner">
+            <div class="expand-row">
+              <span class="expand-label">Style</span>
+              <select class="sel-input" id="s-ch-style">
+                <option value="cross">Cross</option>
+                <option value="dot">Dot</option>
+                <option value="circle">Circle</option>
+                <option value="cross+dot">Cross + Dot</option>
+              </select>
+            </div>
+            <div class="expand-row">
+              <span class="expand-label">Color</span>
+              <div class="color-row">
+                <input type="color" id="s-ch-color">
+                <input type="text" class="color-hex" id="s-ch-color-hex" maxlength="7" placeholder="#2dd4bf">
+              </div>
+            </div>
+            <div class="expand-row slider-row-wrap">
+              <span class="expand-label">Size <span class="val-label" id="lbl-ch-size">12</span></span>
+              <input type="range" id="s-ch-size" min="1" max="40" value="12">
+            </div>
+            <div class="expand-row slider-row-wrap">
+              <span class="expand-label">Thickness <span class="val-label" id="lbl-ch-thick">2</span></span>
+              <input type="range" id="s-ch-thick" min="1" max="10" value="2">
+            </div>
+            <div class="expand-row slider-row-wrap">
+              <span class="expand-label">Gap <span class="val-label" id="lbl-ch-gap">4</span></span>
+              <input type="range" id="s-ch-gap" min="0" max="20" value="4">
+            </div>
+            <div class="expand-row slider-row-wrap">
+              <span class="expand-label">Opacity <span class="val-label" id="lbl-ch-opacity">100%</span></span>
+              <input type="range" id="s-ch-opacity" min="0" max="100" value="100">
+            </div>
+            <div class="expand-row">
+              <span class="expand-label">Outline</span>
+              <label class="toggle sm"><input type="checkbox" id="s-ch-outline"><div class="toggle-track"></div></label>
+            </div>
+            <div class="expand-row">
+              <span class="expand-label">Outline Color</span>
+              <div class="color-row">
+                <input type="color" id="s-ch-out-color">
+                <input type="text" class="color-hex" id="s-ch-out-hex" maxlength="7" placeholder="#000000">
+              </div>
+            </div>
+            <div class="expand-row" style="justify-content:center;">
+              <canvas id="ch-preview" width="100" height="100"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resource Swapper -->
+        <div class="setting-row" data-key="resource_swapper">
+          <div class="setting-info">
+            <div class="setting-name">Resource Swapper</div>
+            <div class="setting-desc">Replace game assets with local files</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-res-enabled"><div class="toggle-track"></div></label>
+        </div>
+        <div class="setting-expand" id="expand-resources">
+          <div class="expand-inner">
+            <div id="res-list" class="res-list"></div>
+            <button class="ghost-btn" onclick="openResourcesFolder()" style="margin-top:8px">Open resources/ folder</button>
+          </div>
+        </div>
+
+        <!-- Custom CSS -->
+        <div class="setting-row" data-key="custom_css_enabled">
+          <div class="setting-info">
+            <div class="setting-name">Custom CSS</div>
+            <div class="setting-desc">Inject CSS into the game page</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-css-enabled"><div class="toggle-track"></div></label>
+        </div>
+        <div class="setting-expand" id="expand-css">
+          <div class="expand-inner">
+            <textarea class="code-area" id="s-css" placeholder="/* your CSS here */"></textarea>
+          </div>
+        </div>
+
+        <!-- Chrome Flags -->
+        <div class="setting-row" data-key="chrome_flags_enabled">
+          <div class="setting-info">
+            <div class="setting-name">Chrome Flags</div>
+            <div class="setting-desc">Extra Chromium launch flags</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-flags-enabled"><div class="toggle-track"></div></label>
+        </div>
+        <div class="setting-expand" id="expand-flags">
+          <div class="expand-inner">
+            <textarea class="code-area" id="s-flags" placeholder="--flag-one&#10;--flag-two=value"></textarea>
+          </div>
+        </div>
+
+        <!-- GPU -->
+        <div class="setting-row" data-key="enable_gpu">
+          <div class="setting-info">
+            <div class="setting-name">GPU Acceleration</div>
+            <div class="setting-desc">Recommended — improves FPS</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-gpu"><div class="toggle-track"></div></label>
+        </div>
+
+        <!-- Ad Blocker -->
+        <div class="setting-row" data-key="block_ads">
+          <div class="setting-info">
+            <div class="setting-name">Ad & Tracker Blocker</div>
+            <div class="setting-desc">Blocks 30+ domains on load</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-ads"><div class="toggle-track"></div></label>
+        </div>
+
+        <!-- Keep launcher open -->
+        <div class="setting-row" data-key="keep_launcher_open">
+          <div class="setting-info">
+            <div class="setting-name">Keep Launcher Open</div>
+            <div class="setting-desc">Don't close launcher when game launches</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-keep-open"><div class="toggle-track"></div></label>
+        </div>
+
+        <!-- Debug Logs -->
+        <div class="setting-row" data-key="debug_logs">
+          <div class="setting-info">
+            <div class="setting-name">Debug Logs</div>
+            <div class="setting-desc">Verbose logging in krunker.py</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="s-debug"><div class="toggle-track"></div></label>
+        </div>
+
+        <!-- Menu Keybind -->
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-name">Overlay Menu Keybind</div>
+            <div class="setting-desc">Key to open client menu in-game</div>
+          </div>
+          <input type="text" class="num-input" id="s-keybind" maxlength="1" style="width:44px;text-align:center;">
+        </div>
+
+      </div>
+      <div class="overlay-footer">
+        <button class="ghost-btn" data-close="settings">Cancel</button>
+        <button class="accent-btn" id="btn-save-settings">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Scripts Overlay ── -->
+  <div class="overlay" id="overlay-scripts">
+    <div class="overlay-panel">
+      <div class="overlay-header">
+        <span class="overlay-title">Userscripts</span>
+        <button class="overlay-close" data-close="scripts">✕</button>
+      </div>
+      <div class="overlay-body">
+        <p class="overlay-desc">Drop <code>.js</code> files into <code>scripts/</code>. They run at document start via Playwright's init script API — equivalent to Tampermonkey <code>@run-at document-start</code>.</p>
+        <div id="scripts-list" class="scripts-list"></div>
+      </div>
+      <div class="overlay-footer">
+        <button class="ghost-btn" onclick="openScriptsFolder()">Open scripts/ folder</button>
+        <button class="ghost-btn" onclick="loadScripts()">Refresh</button>
+        <button class="accent-btn" id="btn-save-scripts">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Logs Overlay ── -->
+  <div class="overlay" id="overlay-logs">
+    <div class="overlay-panel overlay-panel-wide">
+      <div class="overlay-header">
+        <span class="overlay-title">Logs</span>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="ghost-btn sm" onclick="clearLogs()">Clear</button>
+          <button class="overlay-close" data-close="logs">✕</button>
+        </div>
+      </div>
+      <div class="overlay-body" style="padding:0;">
+        <div id="log-output"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Toast ── -->
+  <div id="toast"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
